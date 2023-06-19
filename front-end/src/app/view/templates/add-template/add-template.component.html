@@ -1,0 +1,91 @@
+<button style="right: 0; margin: 20px; z-index: 9999; position: absolute;" type="button" class="btn btn-secondary"
+    (click)="addItem()"><fa-icon [icon]="faPlus"></fa-icon>Pergunta</button>
+<mat-card>
+
+    <div class="row">
+        <div class="col-2">
+            <label for="template-name">Nome do template: </label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="template-name" placeholder="Nome do template"
+                    [(ngModel)]="template.nome_template" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-2">
+            <label for="materia">Matéria: </label>
+            <div class="input-group">
+                <input type="text" class="form-control" id="materia" placeholder="Matéria"
+                    [(ngModel)]="template.materia" aria-describedby="basic-addon1">
+            </div>
+        </div>
+        <div class="col-2">
+            <label for="dificuldade">Dificuldade: </label>
+            <select class="custom-select form-control" id="dificuldade" [(ngModel)]="template.dificuldade">
+                <option selected value="">Escolha...</option>
+                <option value="Difícil">Difícil</option>
+                <option value="Intermediário">Intermediário</option>
+                <option value="Fácil">Fácil</option>
+            </select>
+        </div>
+    </div>
+
+    <h2>Perguntas</h2>
+    <mat-card-content style>
+        <mat-accordion>
+            <ng-container *ngFor="let item of perguntas; let i = index">
+                <mat-expansion-panel class="mt-2 mb-2" [hideToggle]="true" [expanded]="item.expanded">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            #{{ i + 1 }} <div class="input-group ms-3">
+                                <input style="width: 200px;" type="text" [(ngModel)]="item.cabecalho"
+                                    class="form-control-sm" placeholder="Nome do template"
+                                    aria-describedby="basic-addon1">
+                            </div>
+                        </mat-panel-title>
+                         Duração(Segundos): <div class="input-group ms-3">
+                            <input style="width: 200px;" type="text" [(ngModel)]="item.duracao"
+                                class="form-control-sm" placeholder="Duração"
+                                aria-describedby="basic-addon1">
+                        </div>
+                        <div (click)="removeItem(i); $event.stopPropagation();">
+                            <fa-icon class="me-3" [icon]="faTrash"></fa-icon>
+                        </div>
+                    </mat-expansion-panel-header>
+                    <div class="example-form">
+                        <mat-radio-group>
+                            <mat-radio-button (click)="item.opcao_correta = '1'" [checked]="item.opcao_correta == '1'">
+                                <div class="input-group">
+                                    <input style="width: 200px;" type="text" [(ngModel)]="item.opcao_1"
+                                    class="form-control-sm" placeholder="Nome do template"
+                                    aria-describedby="basic-addon1">
+                                </div>
+                            </mat-radio-button>
+                            <mat-radio-button (click)="item.opcao_correta = '2'" [checked]="item.opcao_correta == '2'">
+                                <div class="input-group">
+                                    <input style="width: 200px;" type="text" [(ngModel)]="item.opcao_2"
+                                    class="form-control-sm" placeholder="Nome do template"
+                                    aria-describedby="basic-addon1">
+                                </div>
+                            </mat-radio-button>
+                            <mat-radio-button (click)="item.opcao_correta = '3'" [checked]="item.opcao_correta == '3'">
+                                <div class="input-group">
+                                    <input style="width: 200px;" type="text" [(ngModel)]="item.opcao_3"
+                                    class="form-control-sm" placeholder="Nome do template"
+                                    aria-describedby="basic-addon1">
+                                </div>
+                            </mat-radio-button>
+                            <mat-radio-button (click)="item.opcao_correta = '4'" [checked]="item.opcao_correta == '4'">
+                                <div class="input-group">
+                                    <input style="width: 200px;" type="text" [(ngModel)]="item.opcao_4"
+                                    class="form-control-sm" placeholder="Nome do template"
+                                    aria-describedby="basic-addon1">
+                                </div>
+                            </mat-radio-button>
+                        </mat-radio-group>
+                        </div>
+                    </mat-expansion-panel>
+                </ng-container>
+            </mat-accordion>
+            <button style="right: 0;  margin: 20px; z-index: 9999;" type="button" class="btn btn-primary"
+            routerLink="/templates/add" (click)="saveTemplate()">Salvar</button>
+        </mat-card-content>
+</mat-card>

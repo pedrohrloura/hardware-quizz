@@ -1,0 +1,53 @@
+<mat-card>
+
+    <mat-card-content style>
+
+        <h1>Templates</h1>
+        <button style="float: right; margin: 10px " type="button" class="btn btn-secondary"
+            routerLink="/templates/add"><fa-icon [icon]="faPlus"></fa-icon> Template</button>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Dificuldade</th>
+                    <th scope="col">Matéria</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let template of templates;">
+                    <td>{{template.nome_template}}</td>
+                    <td>{{template.dificuldade}}</td>
+                    <td>{{template.materia}}</td>
+                    <td>{{template.created_at | date}}</td>
+                    <td>
+                        <fa-icon style="margin-left: 10px" (click)="playTemplate(template)" [icon]="faPlay"></fa-icon>
+                        <fa-icon style="margin-left: 10px" (click)="editTemplate(template)" [icon]="faEdit"></fa-icon>
+                        <fa-icon style="margin-left: 10px" [icon]="faTrash" (click)="clickedTemplate = template"
+                            data-bs-toggle="modal" data-bs-target="#exampleModal"></fa-icon>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </mat-card-content>
+</mat-card>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Remover Template</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja remover esse template?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="deleteTemplate()">Sim</button>
+            </div>
+        </div>
+    </div>
+</div>

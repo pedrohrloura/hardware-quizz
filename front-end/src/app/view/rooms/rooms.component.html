@@ -1,0 +1,52 @@
+<mat-card>
+    <mat-card-content style>
+        <h1>Salas</h1>
+        <button style="float: right; margin: 10px " type="button" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#exampleModal"><fa-icon [icon]="faPlus"></fa-icon> Sala</button>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Data/Hora de Início</th>
+                    <th>Data/Hora de Fim</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let room of rooms">
+                    <td>#{{ room.id }}</td>
+                    <td>{{ getStatusLabel(room.status_quiz) }}</td>
+                    <td>{{ getFormattedDateTime(room.horario_inicio) }}</td>
+                    <td>{{ getFormattedDateTime(room.horario_limite) }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </mat-card-content>
+</mat-card>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Remover Template</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-12">
+                    <label for="dificuldade">Template: </label>
+                    <select class="custom-select form-control" id="dificuldade" [(ngModel)]="selectedTemplate">
+                        <option selected value="">Escolha...</option>
+                        <option *ngFor="let row of templates" [value]="row.id">{{ row.nome_template }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="createQuiz()"
+                    [disabled]="!selectedTemplate">Criar</button>
+            </div>
+        </div>
+    </div>
+</div>

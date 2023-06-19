@@ -1,0 +1,22 @@
+td.status-true {
+    color: green;
+  }
+  
+  td.status-false {
+    color: red;
+  }
+  
+  td.status-null {
+    color: orange;
+  }
+
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  th,
+  td {
+    height: 50px;
+    vertical-align: middle;
+  }
